@@ -33,9 +33,14 @@ async function run() {
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });
     const bestCollection = await client.db("DoctorDB").collection("bestDoctors");
+    const doctorsCollection = await client.db("DoctorDB").collection("doctors");
 
     app.get("/bestDoctors",async(req,res)=>{
       const result = await bestCollection.find().toArray();
+      res.send(result);
+    })
+    app.get("/doctors",async(req,res)=>{
+      const result = await doctorsCollection.find().toArray();
       res.send(result);
     })
    
